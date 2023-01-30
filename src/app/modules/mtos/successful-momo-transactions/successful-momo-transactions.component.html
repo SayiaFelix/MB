@@ -1,0 +1,92 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+        <div class="card-title">
+            <h3 class="card-label">Mobile Money Transactions</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive angular-bootstrap-table">
+            <div>
+                <span class="badge badge-primary">10 Transactions Count </span> TIGO : 2 | MTN : 4 |
+                VODAFONE : 2 | AIRTEL : 2
+            </div>
+
+            <hr>
+            <table class="table table-head-custom table-vertical-center overflow-hidden">
+                <thead>
+                    <!-- <th class="selection-cell-header" data-row-selection="true">
+              <label class="checkbox checkbox-single"><input type="checkbox" (click)="grouping.selectAllRows()"
+                  [checked]="grouping.checkAreAllRowsSelected()" /><span></span></label>
+            </th> -->
+                    <th>
+                         Status
+                    </th>
+                    <th>
+                        DATETIME
+                    </th>
+                    <th>
+                        MoMo
+                    </th>
+                    <th>
+                        MoMo Trans ID
+                    </th>
+
+                    <th>
+                        TRANSACTION ID
+
+                    </th>
+                    <th>
+                        CUSTOMER PHONE
+
+                    </th>
+                    <th>
+                        AMOUNT
+                    </th>
+                </thead>
+                <tbody>
+                    <!-- <td class="selection-cell">
+              <label class="checkbox checkbox-single"><input type="checkbox" (click)="grouping.selectRow(dt.id)"
+                  [checked]="grouping.isRowSelected(dt.id)" />
+                <span></span>
+              </label>
+            </td> -->
+                    <tr *ngFor="let dt of data">
+                        <td>
+                            <span class="label label-lg label-inline" [class.label-light-success]="dt.passed === true"
+                                [class.label-light-danger]="dt.passed === false">
+                                <ng-container *ngIf="dt.passed === true">SUCCESS</ng-container>
+                                <ng-container *ngIf="dt.passed === false">FAILED</ng-container>
+                            </span>
+                        </td>
+                        <td>{{ dt.created_on | date:"medium"}}</td>
+                        <td>{{ dt.momo }}</td>
+                        <td>{{ dt.momo_transaction_ref }}</td>
+                        <td>{{ dt.transaction_ref }}</td>
+                        <td>{{ dt.customer_no }}</td>
+                        <td>{{ dt.amount }}</td>
+
+                        <!--
+              <td>
+                <span class="label label-lg label-inline" [class.label-light-success]="dt.relation_matched === 1"
+                  [class.label-light-danger]="dt.relation_matched === 0">
+                  <ng-container *ngIf="dt.relation_matched === 1">PASSED</ng-container>
+                  <ng-container *ngIf="dt.relation_matched === 0">FAILED</ng-container>
+                </span>
+              </td>
+              <td>
+                <span class="label label-lg label-inline" [class.label-light-success]="dt.amount_matched === 1"
+                  [class.label-light-danger]="dt.amount_matched === 0">
+                  <ng-container *ngIf="dt.amount_matched === 1">PASSED</ng-container>
+                  <ng-container *ngIf="dt.amount_matched === 0">FAILED</ng-container>
+                </span>
+              </td> -->
+
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <app-paginator class="d-flex justify-content-between align-items-center flex-wrap" [paginator]="paginator"
+            [isLoading]="isLoading" (paginate)="paginate($event)"></app-paginator>
+    </div>
+</div>

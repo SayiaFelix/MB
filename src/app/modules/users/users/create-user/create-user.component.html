@@ -1,0 +1,108 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" [formGroup]="form">
+        <!--<div class="row">
+         <div class="col-sm-4">
+              <div class="form-group">
+                  <label class="text-gray">First Name</label>
+                  <input formControlName="first_name" class="form-control" type="text">
+                  <small class="text-danger" *ngIf="form.get('first_name').touched && form.get('first_name').hasError('required')">Required
+                      Field</small>
+              </div>
+          </div>
+          <div class="col-sm-4">
+              <div class="form-group">
+                  <label class="text-gray">Middle Name</label>
+                  <input formControlName="middle_name" class="form-control" type="text">
+                  <small class="text-danger" *ngIf="form.get('middle_name').touched && form.get('middle_name').hasError('required')">Required
+                      Field</small>
+              </div>
+          </div>
+          <div class="col-sm-4">
+              <div class="form-group">
+                  <label class="text-gray">Surname</label>
+                  <input formControlName="surname" class="form-control" type="text">
+                  <small class="text-danger" *ngIf="form.get('surname').touched && form.get('surname').hasError('required')">Required
+                      Field</small>
+              </div>
+          </div>
+      </div> -->
+   
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="text-gray">Email Address</label>
+                <input formControlName="email_address" class="form-control" type="text" [readonly]="formData">
+                <small class="text-danger" *ngIf="form.get('email_address').touched ">
+                  <span *ngIf = "form.get('email_address').hasError('required')">
+                      Required Field
+                  </span>
+                  <span *ngIf = "form.get('email_address').hasError('email')">
+                      Please enter a valid email
+                  </span>
+                </small>
+            </div>
+        </div>
+        <!-- <div class="col-sm-12">
+            <div class="form-group">
+                <label class="text-gray">Username</label>
+                <input formControlName="username" class="form-control" type="text">
+                <small class="text-danger" *ngIf="form.get('username').touched && form.get('username').hasError('required')">Required
+                    Field</small>
+            </div>
+        </div> -->
+        <!-- <div class="col-sm-12" *ngIf = "!formData">
+            <div class="form-group">
+                <label class="text-gray">Password</label>
+                <input formControlName="password" class="form-control" type="password">
+                <small class="text-danger" *ngIf="form.get('password').touched && form.get('password').hasError('required')">Required
+                    Field</small>
+            </div>
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+              <div>   
+                  <h6>Assign Profiles</h6>
+                  <ss-multiselect-dropdown class="custom-multiselect"
+                  formControlName="profiles"
+                  [options]="profiles" 
+                  [texts]="thirdControlTexts" 
+                  [settings]="thirdControlSettings"
+                  [(ngModel)]="assignedProfilesModel"></ss-multiselect-dropdown>
+              </div>  
+              <span *ngIf = "form.get('profiles').hasError('required')">
+                Required Field
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="is_active">Status</label>
+            <select formControlName="is_active" class="form-control custom-select" id="is_active">
+              <option value="1">ACTIVE</option>
+              <option value="0">INACTIVE</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    <div *ngIf="loading" class="progress">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75"
+        aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+    </div>
+    <div *ngIf="errorMessages" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <div *ngFor="let err of errorMessages">{{err.message}}</div>
+    </div>
+    <div class="modal-footer">
+  
+      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+      <button [disabled]="!form.valid" type="button" class="btn  btn-md btn-primary" (click)="submitData()">Save Record</button>
+  
+    </div>

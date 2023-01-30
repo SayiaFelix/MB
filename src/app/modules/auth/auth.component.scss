@@ -1,0 +1,15 @@
+@import "../../../assets/sass/pages/login/login-1.scss";
+
+:host {
+  height: 100%;
+}
+
+ul{ list-style: none; color: aliceblue; }
+.mtos {
+  display: flex;
+  flex-wrap: wrap;
+  img {
+    height: 73px;
+  }
+
+}

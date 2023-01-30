@@ -1,0 +1,68 @@
+//
+// Base styles
+//
+
+.callout {
+    
+        position: relative;
+        padding: 0 1rem;
+        margin: 1rem 0;
+        border-left: 4px solid #c8ced3;
+        border-radius: .25rem;
+    
+  
+    .chart-wrapper {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      float: right;
+      width: 50%;
+    }
+  }
+  
+  .callout-bordered {
+    border: 1px solid gray;
+    border-left-width: 4px;
+  }
+  .callout code {
+    border-radius: 4;
+  }
+  .callout h4 {
+    margin-top: 0;
+    margin-bottom: .25rem;
+  }
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+  .callout + .callout {
+    margin-top: - .25rem;
+  }
+  .callout-danger {
+    border-left-color: #f86c6b;
+  }
+  .callout-danger {
+    border-left-color: #f86c6b;
+  }
+  .callout-success {
+    border-left-color: #4dbd74;
+}
+.callout-warning {
+    border-left-color: #ffc107;
+}
+.callout-info {
+    border-left-color: #63c2de;
+}
+  .cardit {
+    // position: relative;
+    // display: flex;
+    // flex-direction: column;
+    // min-width: 0;
+    // word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+  //  border: 1px solid #c8ced3;
+  //  border-radius: .25rem;
+}
+  
+  
+  

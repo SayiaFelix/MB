@@ -1,0 +1,46 @@
+<div class="filter-grid">
+
+  <div class=" form-group">
+    <label>Select Date Range</label>
+    <input type="text" placeholder="Select Dates" class="form-control" [(ngModel)]="bsRangeValue"
+      (ngModelChange)="applyFilters()" bsDaterangepicker>
+    <small>{{bsRangeValue[0] | date:"longDate"}} <b>to</b> {{bsRangeValue[1] | date:"longDate"}}</small>
+  </div>
+
+  <!-- <div class="form-group">
+    <label>Username</label>
+    <input [(ngModel)]="username" (ngModelChange)="applyFilters()" type="text" class="form-control"
+      placeholder="Username">
+  </div> -->
+  <div class="form-group">
+    <label>Username</label>
+    <select type="text" class="form-control" placeholder="10" [(ngModel)]="username" (ngModelChange)="applyFilters()">
+      <option *ngFor="let user of users "  [value]="user.username">{{user.username}}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Per Page</label>
+    <select placeholder="10" [(ngModel)]="defaultRowPerPage" (ngModelChange)="applyFilters()">
+      <option  value=5>5</option>
+      <option  value=10>10</option>
+      <option  value=20>20</option>
+      <option value=50>50</option>
+      <option  value=100>100</option>
+    </select>
+  </div>
+  <div class="filter-actions">
+    <!-- <button class="btn btn-sm btn-primary" (click)="applyFilters()"><i class="fa fa-search"></i>Apply Filters</button> -->
+    <button class="btn btn-sm btn-danger" (click)="clearFilters()"><i class="fa fa-eraser"></i>Clear Filters</button>
+  </div>
+
+</div>
+<div widget class="card border-0 box-shadow">
+  <div class="card-body pt-0 widget-body">
+    <div class="table-responsive table-striped">
+      <ng2-smart-table class="table table-hover" [settings]="settings" [source]="dataSet"
+        (custom)="onCustomAction($event)">
+      </ng2-smart-table>
+    </div>
+  </div>
+</div>

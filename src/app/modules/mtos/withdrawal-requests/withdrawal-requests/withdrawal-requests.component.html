@@ -1,0 +1,141 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+      <div class="card-title">
+        <h3 class="card-label">Withdrawal Requests</h3>
+      </div>
+      <div class="card-toolbar">
+        <!-- <a
+          type="button"
+          class="btn btn-primary"
+          routerLink="/ecommerce/dt/add"
+          >New Company</a
+        > -->
+      </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive angular-bootstrap-table">
+            <table
+              class="table table-head-custom table-vertical-center overflow-hidden"
+            >
+              <thead>
+                <th class="selection-cell-header" data-row-selection="true">
+                  <label class="checkbox checkbox-single"
+                    ><input
+                      type="checkbox"
+                      (click)="grouping.selectAllRows()"
+                      [checked]="grouping.checkAreAllRowsSelected()" /><span></span
+                  ></label>
+                </th>
+                <th>
+                   TIMESTAMP
+                </th>
+                
+                <th>
+                  MTO
+                </th>
+                <th>
+                    PAYOUT REF NO
+                    <app-sort-icon
+                      column="transaction_reference"
+                      [activeColumn]="sorting.column"
+                      [activeDirection]="sorting.direction"
+                      (sort)="sort($event)"
+                    ></app-sort-icon>
+                  </th>
+                <th>
+                  TRANS REF NO
+                  <app-sort-icon
+                    column="transaction_reference"
+                    [activeColumn]="sorting.column"
+                    [activeDirection]="sorting.direction"
+                    (sort)="sort($event)"
+                  ></app-sort-icon>
+                </th>
+                <th>
+                   MOMO/WALLET/BANK
+                  </th>
+                
+             
+                <th>
+                  TRANSACTION AMOUNT 
+                  <app-sort-icon
+                    column="customer_amount"
+                    [activeColumn]="sorting.column"
+                    [activeDirection]="sorting.direction"
+                    (sort)="sort($event)"
+                  ></app-sort-icon>
+                </th>
+                <th>
+                  TRANSACTION STATUS
+                </th>
+                <th>
+                    DESCRIPTION
+                  </th>
+                <!-- <th>ACTIONS</th> -->
+              </thead>
+              <tbody>
+                 <tr *ngFor="let dt of data">
+                  <td class="selection-cell">
+                    <label class="checkbox checkbox-single"
+                      ><input
+                        type="checkbox"
+                        (click)="grouping.selectRow(dt.id)"
+                        [checked]="grouping.isRowSelected(dt.id)"
+                      />
+                      <span></span>
+                    </label>
+                  </td>
+                  <td>{{ dt.created_on | date:"medium"}}</td>
+                  <td>UNITY LINK</td>
+                  <td>{{ dt.transaction_reference }}</td>
+                  <td>{{ dt.transaction_reference }}</td>
+                  <td>BANK ACCOUNT</td>
+                  <td>{{ dt.customer_amount }}</td>
+                
+                  <td>
+                    <span
+                      class="label label-lg label-inline"
+                      [class.label-light-success]="dt.amount_matched === 1"
+                      [class.label-light-danger]="dt.amount_matched === 0"
+                    >
+                      <ng-container *ngIf="dt.amount_matched === 1" >SUCCESS</ng-container >
+                      <ng-container *ngIf="dt.amount_matched === 0">FAILED</ng-container>
+                    </span>
+                  </td>
+                  <td>Wrong OTP</td>
+                  <!-- <td>
+                    <a
+                      title="Edit dt"
+                      class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                      [routerLink]="'/ecommerce/dt/edit/' + dt.id"
+                    >
+                      <span
+                        [inlineSVG]="
+                          './assets/media/svg/icons/Communication/Write.svg'
+                        "
+                        cacheSVG="true"
+                        class="svg-icon svg-icon-md svg-icon-primary"
+                      >
+                      </span>
+                    </a>
+                    <a
+                      title="Delete dt"
+                      class="btn btn-icon btn-light btn-hover-danger btn-sm"
+                      (click)="delete(dt.id)"
+                    >
+                      <span
+                        [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'"
+                        cacheSVG="true"
+                        class="svg-icon svg-icon-md svg-icon-danger"
+                      >
+                      </span>
+                    </a>
+                  </td> -->
+                </tr> 
+              </tbody>
+            </table>
+          </div>
+     
+    </div>
+  </div>
+  

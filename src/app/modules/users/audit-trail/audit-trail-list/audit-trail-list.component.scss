@@ -1,0 +1,16 @@
+.filter-grid {
+    display: flex;
+    justify-content: center;
+
+}
+label {
+    color: blue;
+}
+.filter-actions{
+   // padding: 10px;
+    justify-content: space-around;
+  //  align-content: space-between;
+
+    display: flex;
+    flex-direction: column;
+}
