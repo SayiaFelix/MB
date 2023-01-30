@@ -9,7 +9,7 @@ export const environment = {
   isMockEnabled: true,
   apiUrl: 'http://198.211.96.36:8080/',
 
-   _loginUrl: 'http:/10.20.2.148:7100/oauth/token/pin',
+   _loginUrl: 'http://10.20.2.148:7100/oauth/token/pin',
   Username: 'mb-portal',
   Password: 'Y2hhbWFzZWNyZXQ=',
 };

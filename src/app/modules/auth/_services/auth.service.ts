@@ -21,7 +21,13 @@ export class AuthService implements OnDestroy {
   currentUserSubject: BehaviorSubject<UserModel>;
   isLoadingSubject: BehaviorSubject<boolean>;
 
-
+  // headers = {
+  //   headers: new HttpHeaders({
+  //     'Content-Type': 'application/x-www-form-urlencoded',
+  //     'Authorization': 'Basic ' + btoa(environment.Username +  ':' + environment.Password),
+  //   }),
+  // };
+  
   get currentUserValue(): UserModel {
     return this.currentUserSubject.value;
   }
