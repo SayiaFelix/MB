@@ -11,6 +11,7 @@ export class AuthModel {
 }
 
 export  interface AuthLogin{
+status: number;
 grant_type : 'pin',
 username : string,
 pin : number

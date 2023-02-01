@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HttpService } from 'src/app/_metronic/shared/crud-table/services/http.service';
@@ -19,9 +18,9 @@ export class LoginComponent implements OnInit {
 public loginForm! : FormGroup;
   // loginForm: FormGroup;
 
-  hasError: boolean;
+  // hasError: boolean;
   errorMessage: string = '';
-  clicks: number = 0;
+  status: number;
   // returnUrl: string;
 
   constructor(
@@ -68,18 +67,21 @@ public loginForm! : FormGroup;
         .subscribe({
           next: (res) => {
             console.log(res);
-            alert('Login Successfully')
-            // this.toast.success
-            //   ({ detail: 'Success Message', summary: "Login Completed Successfully!!", duration: 5000 })
-            this.loginForm.reset();
-            // this.auth.storedToken(res.token)
-            this.router.navigate(['dashboard']);
+            if(res.status === 200){
+              alert('Login Successfully')
+               this.loginForm.reset();
+                // this.auth.storedToken(res.token)
+                 this.router.navigate(['dashboard']);
+            } else {
+
+              alert('Username not found')
+            }    
           },
-          error: (err) => {
+          error: (error) => {
             this.errorMessage = 'Login Failed ,Kindly Try Again.';
-            // alert('Login Failed')
-            // this.toast.error
-            //   ({ detail: 'Failed Message', summary: "Login Failed, Something Went wrong!!", duration: 5000 })
+            alert('Login Failed')
+            console.log(error)
+           
           }
         })
     }
