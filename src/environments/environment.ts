@@ -7,10 +7,10 @@ export const environment = {
   appVersion: 'v726demo1',
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,
-  apiUrl: 'http://198.211.96.36:8080/',
+   apiUrl: 'http://198.211.96.36:8080/',
 
-   _loginUrl: 'http://10.20.2.148:7100/oauth/token/pin',
-  Username: 'mb-portal',
+  loginUrl: 'http://10.20.2.148:7100',
+  Username: 'mb_clientid',
   Password: 'Y2hhbWFzZWNyZXQ=',
 };
 

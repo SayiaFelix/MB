@@ -9,3 +9,9 @@ export class AuthModel {
     this.expiresIn = auth.expiresIn;
   }
 }
+
+export  interface AuthLogin{
+grant_type : 'pin',
+username : string,
+pin : number
+}

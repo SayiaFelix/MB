@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HttpService } from 'src/app/_metronic/shared/crud-table/services/http.service';
+import { AuthHTTPService } from '../_services/auth-http/auth-http.service';
+
 import { AuthService } from '../_services/auth.service';
 
 @Component({
@@ -14,15 +16,19 @@ import { AuthService } from '../_services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup;
+public loginForm! : FormGroup;
+  // loginForm: FormGroup;
+
   hasError: boolean;
   errorMessage: string = '';
   clicks: number = 0;
-  returnUrl: string;
+  // returnUrl: string;
 
   constructor(
     private fb: FormBuilder,
     private httpService: HttpService,
+    // private toast: NgToastrService,
+    private httpAuthService : AuthHTTPService,
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router
@@ -30,69 +36,53 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initForm();
+    this.validateForm();
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'.toString()] || '/';
-
-    //   this.errorMessage.subscribe(data => {
-    //    console.log(data);
-    //     this.changeDetector.markForCheck();
-    // });
-
-
+    // this.returnUrl = this.route.snapshot.queryParams['returnUrl'.toString()] || '/';
   }
 
-  // convenience getter for easy access to form fields
-  get f() {
-    return this.loginForm.controls;
-  }
-
-  initForm() {
+  validateForm() {
     this.loginForm = this.fb.group({
-      email: ['',
+      username: ['',
         Validators.compose([
           Validators.required,
-          Validators.email,
           Validators.minLength(3),
-          Validators.maxLength(320), // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
+          Validators.maxLength(320),
         ]),
       ],
-      password: ['',
+      pin: ['',
         Validators.compose([
           Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(100),
+          Validators.minLength(4),
+          Validators.maxLength(4),
         ]),
       ],
     });
   }
 
-  submit() {
-    this.clicks++;
-    this.hasError = false;
-    const model = {
-      "logoutElseWhere": true,
-      "username": this.f.email.value,
-      "password": this.f.password.value
+  loginUser() {
+    if (this.loginForm.valid) {
+      // send obj to db
+      console.log(this.loginForm.value);
+      this.httpAuthService.loginUser(this.loginForm.value)
+        .subscribe({
+          next: (res) => {
+            console.log(res);
+            alert('Login Successfully')
+            // this.toast.success
+            //   ({ detail: 'Success Message', summary: "Login Completed Successfully!!", duration: 5000 })
+            this.loginForm.reset();
+            // this.auth.storedToken(res.token)
+            this.router.navigate(['dashboard']);
+          },
+          error: (err) => {
+            this.errorMessage = 'Login Failed ,Kindly Try Again.';
+            // alert('Login Failed')
+            // this.toast.error
+            //   ({ detail: 'Failed Message', summary: "Login Failed, Something Went wrong!!", duration: 5000 })
+          }
+        })
     }
-    // this.httpService.login('auth/login-portal', model).subscribe(
-    //   result => {
-    //     if (result.response.code == 200) {
-    //       this.authService.currentUserValue = result.data.user;
-    //       console.log(this.returnUrl)
-
-    //       this.errorMessage = '';
-    //       localStorage.setItem('access_token', result.data.access_token);
-    //       localStorage.setItem('token_id', result.data.session_id);
-    //       localStorage.setItem('user', JSON.stringify(result.data.user));
-    //       localStorage.setItem('roles', JSON.stringify(result.data.roles));
-    //       this.router.navigate([this.returnUrl]);
-    //     } else {
-    //       this.errorMessage = result.response.description
-    //     }
-    //   });
-
-      this.router.navigate(['/']);
+  }
   }
 
-}

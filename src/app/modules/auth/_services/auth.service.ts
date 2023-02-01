@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, of, Subscription } from 'rxjs';
 import { map, catchError, switchMap, finalize } from 'rxjs/operators';
 import { UserModel } from '../_models/user.model';
-import { AuthModel } from '../_models/auth.model';
+import {  AuthModel } from '../_models/auth.model';
 import { AuthHTTPService } from './auth-http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
@@ -21,13 +21,22 @@ export class AuthService implements OnDestroy {
   currentUserSubject: BehaviorSubject<UserModel>;
   isLoadingSubject: BehaviorSubject<boolean>;
 
-  // headers = {
-  //   headers: new HttpHeaders({
-  //     'Content-Type': 'application/x-www-form-urlencoded',
-  //     'Authorization': 'Basic ' + btoa(environment.Username +  ':' + environment.Password),
-  //   }),
-  // };
   
+
+  storedToken(tokenValue: string){
+    localStorage.setItem('token', tokenValue);
+  }
+
+  getToken(){
+    return localStorage.getItem('token');
+  }
+
+  isLoggedIn():boolean{
+    return !!localStorage.getItem('token')
+  }
+
+
+
   get currentUserValue(): UserModel {
     return this.currentUserSubject.value;
   }

@@ -18,7 +18,7 @@ import { SplashScreenModule } from './_metronic/partials/layout/splash-screen/sp
 import { FakeAPIService } from './_fake/fake-api.service';
 // #fake-end#
 
-
+// import { NgToastModule } from 'ng-angular-popup';
 import { ToastrModule } from 'ngx-toastr';
 import { SortablejsModule } from 'ngx-sortablejs';
 
@@ -34,6 +34,7 @@ function appInitializer(authService: AuthService) {
 @NgModule({
   declarations: [AppComponent],
   imports: [
+
     BrowserModule,
     BrowserAnimationsModule,
     SplashScreenModule,
