@@ -1,29 +1,29 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UserModel } from '../../_models/user.model';
-import { environment } from '../../../../../environments/environment';
-import { AuthLogin } from '../../_models/auth.model';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { UserModel } from "../../_models/user.model";
+import { environment } from "../../../../../environments/environment";
+import { AuthLogin } from "../../_models/auth.model";
 
 const API_LOGIN_URL = `${environment.loginUrl}/oauth/token/pin`;
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthHTTPService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   headers = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic ' + btoa(environment.Username +  ':' + environment.Password),
+      "Content-Type": "application/x-www-form-urlencoded",
+      Authorization:
+        "Basic " + btoa(environment.Username + ":" + environment.Password),
     }),
   };
 
-loginUser(UserLogin:AuthLogin){
-return this.http.post<AuthLogin>(API_LOGIN_URL, UserLogin ,this.headers )
-}
-  
+  loginUser(UserLogin: AuthLogin) {
+    return this.http.post<AuthLogin>(API_LOGIN_URL, UserLogin, this.headers);
+  }
 
   // public methods
   // login(email: string, password: string): Observable<any> {

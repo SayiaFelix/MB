@@ -2,12 +2,11 @@
 <div class="login-form login-signin">
   <!--begin::Form-->
   <form
-  [formGroup]="loginForm"
-   (ngSubmit)="loginUser()"
+    [formGroup]="loginForm"
+    (ngSubmit)="loginUser()"
     class="form"
     novalidate="novalidate"
     id="kt_login_signin_form"
-   
   >
     <!--begin::Title-->
     <div class="pb-13 pt-lg-0 pt-5">
@@ -17,25 +16,25 @@
     </div>
     <!--end::Title-->
 
-   
- 
     <!-- begin::Alert error-->
 
     <ng-container *ngIf="errorMessage">
       <div
         class="mb-10 alert alert-custom alert-light-danger alert-dismissible"
       >
-        <div class="alert-text">{{errorMessage}}</div>
+        <div class="alert-text">{{ errorMessage }}</div>
       </div>
     </ng-container>
     <!-- end::Alert error-->
 
     <!--begin::Form group-->
-    <div class="form-group"
-     [class.error]="
-    loginForm.controls['username'].dirty &&
-    loginForm.hasError('required', 'email')
-  ">
+    <div
+      class="form-group"
+      [class.error]="
+        loginForm.controls['username'].dirty &&
+        loginForm.hasError('required', 'email')
+      "
+    >
       <label class="font-size-h6 font-weight-bolder text-dark">Username</label>
       <input
         class="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
@@ -52,7 +51,7 @@
           message: 'Username is required',
           control: loginForm.controls['username']
         }"
-      ></ng-container>    
+      ></ng-container>
 
       <ng-container
         [ngTemplateOutlet]="formError"
@@ -62,7 +61,7 @@
           control: loginForm.controls['username']
         }"
       ></ng-container>
-    
+
       <ng-container
         [ngTemplateOutlet]="formError"
         [ngTemplateOutletContext]="{
@@ -75,11 +74,12 @@
     <!--end::Form group-->
 
     <!--begin::Form group-->
-    <div class="form-group"
+    <div
+      class="form-group"
       [class.error]="
-    loginForm.controls['pin'].dirty &&
-    loginForm.hasError('required', 'pin')
-  ">
+        loginForm.controls['pin'].dirty && loginForm.hasError('required', 'pin')
+      "
+    >
       <div class="d-flex justify-content-between mt-n5">
         <label class="font-size-h6 font-weight-bolder text-dark pt-5"
           >Pin</label
@@ -133,9 +133,9 @@
       <button
         type="submit"
         id="kt_login_signin_submit"
-        class="btn  btn-login font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+        class="btn btn-login font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
       >
-        Sign In 
+        Sign In
       </button>
     </div>
     <!--end::Action-->

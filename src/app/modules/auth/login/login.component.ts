@@ -1,25 +1,29 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { HttpService } from 'src/app/_metronic/shared/crud-table/services/http.service';
-import { AuthHTTPService } from '../_services/auth-http/auth-http.service';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Observable } from "rxjs";
+import { HttpService } from "src/app/_metronic/shared/crud-table/services/http.service";
+import { AuthHTTPService } from "../_services/auth-http/auth-http.service";
 
-import { AuthService } from '../_services/auth.service';
+import { AuthService } from "../_services/auth.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"],
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit {
-
-public loginForm! : FormGroup;
+  public loginForm!: FormGroup;
   // loginForm: FormGroup;
 
   // hasError: boolean;
-  errorMessage: string = '';
+  errorMessage: string = "";
   status: number;
   // returnUrl: string;
 
@@ -27,12 +31,11 @@ public loginForm! : FormGroup;
     private fb: FormBuilder,
     private httpService: HttpService,
     // private toast: NgToastrService,
-    private httpAuthService : AuthHTTPService,
+    private httpAuthService: AuthHTTPService,
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.validateForm();
@@ -42,14 +45,16 @@ public loginForm! : FormGroup;
 
   validateForm() {
     this.loginForm = this.fb.group({
-      username: ['',
+      username: [
+        "",
         Validators.compose([
           Validators.required,
           Validators.minLength(3),
           Validators.maxLength(320),
         ]),
       ],
-      pin: ['',
+      pin: [
+        "",
         Validators.compose([
           Validators.required,
           Validators.minLength(4),
@@ -63,28 +68,26 @@ public loginForm! : FormGroup;
     if (this.loginForm.valid) {
       // send obj to db
       console.log(this.loginForm.value);
-      this.httpAuthService.loginUser(this.loginForm.value)
-        .subscribe({
-          next: (res) => {
-            console.log(res);
-            if(res.status === 200){
-              alert('Login Successfully')
-               this.loginForm.reset();
-                // this.auth.storedToken(res.token)
-                 this.router.navigate(['dashboard']);
-            } else {
-
-              alert('Username not found')
-            }    
-          },
-          error: (error) => {
-            this.errorMessage = 'Login Failed ,Kindly Try Again.';
-            alert('Login Failed')
-            console.log(error)
-           
-          }
-        })
+      this.httpAuthService.loginUser(this.loginForm.value).subscribe({
+        next: (res) => {
+          console.log(res);
+          console.log(res.message)
+          alert("Login Successfully");
+          this.loginForm.reset();
+          // this.auth.storedToken(res.token)
+          this.router.navigate(["dashboard"]);
+          // if(res.status === 200){
+          // } else {
+          
+          //   alert('Username not found')
+          // }
+        },
+        error: (error) => {
+          this.errorMessage = "Login Failed ,Kindly Try Again.";
+          alert("Login Failed");
+          console.log(error);
+        },
+      });
     }
   }
-  }
-
+}

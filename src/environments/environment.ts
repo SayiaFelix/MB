@@ -8,8 +8,9 @@ export const environment = {
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,
    apiUrl: 'http://198.211.96.36:8080/',
-
-  loginUrl: 'http://10.20.2.148:7100',
+   
+  loginUrl:'https://test-api.ekenya.co.ke/mobile-banking',
+  // loginUrl: 'http://10.20.2.148:7100',
   Username: 'mb_clientid',
   Password: 'Y2hhbWFzZWNyZXQ=',
 };
